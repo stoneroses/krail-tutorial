@@ -2,6 +2,7 @@ package com.example.tutorial.app;
 
 import com.example.tutorial.i18n.LabelKey;
 import com.example.tutorial.pages.AnnotatedPagesModule;
+import com.example.tutorial.pages.MyOtherPages;
 import com.example.tutorial.pages.MyPages;
 import com.example.tutorial.pages.MyPublicPages;
 import com.google.inject.Module;
@@ -31,6 +32,7 @@ public class BindingManager extends DefaultBindingManager {
         baseModules.add(new AnnotatedPagesModule());
         baseModules.add(new SystemAdminPages());
         baseModules.add(new MyPublicPages());
+        baseModules.add(new MyOtherPages());
     }
 
     @Override
