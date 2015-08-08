@@ -1,5 +1,6 @@
 package com.example.tutorial.app;
 
+import com.example.tutorial.i18n.LabelKey;
 import com.example.tutorial.pages.AnnotatedPagesModule;
 import com.example.tutorial.pages.MyPages;
 import com.example.tutorial.pages.MyPublicPages;
@@ -7,6 +8,7 @@ import com.google.inject.Module;
 import uk.q3c.krail.core.guice.DefaultBindingManager;
 import uk.q3c.krail.core.navigate.sitemap.SystemAccountManagementPages;
 import uk.q3c.krail.core.sysadmin.SystemAdminPages;
+import uk.q3c.krail.core.ui.DefaultUIModule;
 
 import java.util.List;
 
@@ -29,5 +31,11 @@ public class BindingManager extends DefaultBindingManager {
         baseModules.add(new AnnotatedPagesModule());
         baseModules.add(new SystemAdminPages());
         baseModules.add(new MyPublicPages());
+    }
+
+    @Override
+    protected Module uiModule() {
+        return new DefaultUIModule().uiClass(TutorialUI.class)
+                                    .applicationTitleKey(LabelKey.Krail_Tutorial);
     }
 }
