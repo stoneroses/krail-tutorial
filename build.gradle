@@ -1,0 +1,25 @@
+apply from: 'http://plugins.jasoft.fi/vaadin-groovy.plugin?version=0.10.1'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+
+sourceCompatibility = '1.8'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile(group: 'uk.q3c.krail', name: 'krail', version: '0.9.6')
+}
+
+vaadin {
+    widgetset 'com.example.tutorial.widgetset.tutorialWidgetset'
+    plugin.logToConsole = true
+}
+
+configurations.all {
+    resolutionStrategy {
+        // GWT requires an old version of the validation API.  Changing to a newer version breaks widgetset compile but throws no errors
+        force 'javax.validation:validation-api:1.0.0.GA'
+    }
+}
