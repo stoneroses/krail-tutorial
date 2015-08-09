@@ -1,6 +1,7 @@
 package com.example.tutorial.app;
 
 import com.example.tutorial.i18n.LabelKey;
+import com.example.tutorial.ini.TutorialIniConfigModule;
 import com.example.tutorial.pages.AnnotatedPagesModule;
 import com.example.tutorial.pages.MyOtherPages;
 import com.example.tutorial.pages.MyPages;
@@ -39,5 +40,11 @@ public class BindingManager extends DefaultBindingManager {
     protected Module uiModule() {
         return new DefaultUIModule().uiClass(TutorialUI.class)
                                     .applicationTitleKey(LabelKey.Krail_Tutorial);
+    }
+
+
+    @Override
+    protected Module applicationConfigurationModule() {
+        return new TutorialIniConfigModule();
     }
 }
