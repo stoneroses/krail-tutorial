@@ -9,8 +9,8 @@ repositories {
 }
 
 dependencies {
-    compile(group: 'uk.q3c.krail', name: 'krail', version: '0.9.6')
-    compile 'javax.persistence:persistence-api:1.0.2'
+    compile 'uk.q3c.krail:krail:0.9.6'
+    compile 'uk.q3c.krail:krail-jpa:0.9.0'
 }
 
 vaadin {

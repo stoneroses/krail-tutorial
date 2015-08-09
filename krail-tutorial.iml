@@ -87,7 +87,15 @@
     <orderEntry type="library" exported="" name="Gradle: com.vaadin.external.google:guava:16.0.1.vaadin1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: concurrent:concurrent:1.3.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: stax:stax-api:1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: javax.persistence:persistence-api:1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: uk.q3c.krail:krail-jpa:0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.hsqldb:hsqldb:2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.derby:derby:10.11.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.eclipse.persistence:eclipselink:2.6.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.vaadin.addon:jpacontainer:3.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: javax.transaction:jta:1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.eclipse.persistence:javax.persistence:2.1.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.eclipse.persistence:commonj.sdo:2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.glassfish:javax.json:1.0.4" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

@@ -2,12 +2,12 @@ package com.example.tutorial.form;
 
 import uk.q3c.krail.core.data.KrailEntity;
 
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Person implements KrailEntity<Long, Integer> {
 
     @Min(0)
@@ -16,6 +16,7 @@ public class Person implements KrailEntity<Long, Integer> {
     @Size(min = 3)
     private String firstName;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 3)
