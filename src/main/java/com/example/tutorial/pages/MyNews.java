@@ -1,10 +1,14 @@
 package com.example.tutorial.pages;
 
+import com.example.tutorial.i18n.DescriptionKey;
 import com.example.tutorial.i18n.LabelKey;
 import com.google.inject.Inject;
 import com.vaadin.data.Property;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import uk.q3c.krail.core.shiro.SubjectProvider;
+import uk.q3c.krail.core.user.notify.UserNotifier;
 import uk.q3c.krail.core.user.opt.Option;
 import uk.q3c.krail.core.user.opt.OptionContext;
 import uk.q3c.krail.core.user.opt.OptionKey;
@@ -19,6 +23,8 @@ public class MyNews extends Grid3x3ViewBase implements OptionContext {
     public static final OptionKey<Boolean> ceoVisible = new OptionKey<>(true, MyNews.class, LabelKey.CEO_News_Channel);
     public static final OptionKey<Boolean> itemsForSaleVisible = new OptionKey<>(true, MyNews.class, LabelKey.Items_For_Sale_Channel);
     public static final OptionKey<Boolean> vacanciesVisible = new OptionKey<>(true, MyNews.class, LabelKey.Vacancies_Channel);
+    private final SubjectProvider subjectProvider;
+    private final UserNotifier userNotifier;
     private Label ceoNews;
     private Label itemsForSale;
     private Option option;
@@ -28,9 +34,11 @@ public class MyNews extends Grid3x3ViewBase implements OptionContext {
     private Label vacancies;
 
     @Inject
-    public MyNews(Option option, OptionPopup optionPopup) {
+    public MyNews(Option option, OptionPopup optionPopup, SubjectProvider subjectProvider, UserNotifier userNotifier) {
         this.option = option;
         this.optionPopup = optionPopup;
+        this.subjectProvider = subjectProvider;
+        this.userNotifier = userNotifier;
     }
 
     @Override
@@ -58,7 +66,17 @@ public class MyNews extends Grid3x3ViewBase implements OptionContext {
             option.set(false, 1, ceoVisible);
             optionValueChanged(null);
         });
+        if (subjectProvider.get()
+                           .isPermitted("option:edit:SimpleUserHierarchy:*:1:*:*")) {
+            systemOptionButton.setVisible(true);
+        } else {
+            systemOptionButton.setVisible(false);
+        }
         setBottomRight(systemOptionButton);
+
+        Button payRiseButton = new Button("request a pay rise");
+        payRiseButton.addClickListener(event -> requestAPayRise());
+        setBottomLeft(payRiseButton);
 
         optionValueChanged(null);
     }
@@ -68,6 +86,11 @@ public class MyNews extends Grid3x3ViewBase implements OptionContext {
         ceoNews.setVisible(option.get(ceoVisible));
         itemsForSale.setVisible(option.get(itemsForSaleVisible));
         vacancies.setVisible(option.get(vacanciesVisible));
+    }
+
+    @RequiresPermissions("pay:request-increase")
+    protected void requestAPayRise() {
+        userNotifier.notifyInformation(DescriptionKey.You_just_asked_for_a_pay_increase);
     }
 
     @Nonnull
